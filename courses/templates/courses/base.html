@@ -35,7 +35,7 @@
           {% if 'courses.change_scoring' in user.get_user_permissions %}
           <a class="nav-link" href="{% url 'scoring' %}">Scores</a>
           {% else %}
-          <a class="nav-link" href="{% url 'scoringread' %}">Scores</a>
+          <a class="nav-link" href="{% url 'scoringreadlist' %}">Scores</a>
           {% endif %}
         </li>
         <li class="nav-item dropdown">
