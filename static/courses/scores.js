@@ -291,7 +291,7 @@ async function plot(course, score_type) {
   };
   var rich_mousemove = function (d, i) {
     Tooltip.html(
-      `Hole ${i["hole"]["hole"]}<br>Shots${i["rich"]}<br>Par ${i["hole"]["par"]}<br>Points ${i["rich_stable"]}`
+      `Hole ${i["hole"]["hole"]}<br>Shots ${i["rich"]}<br>Par ${i["hole"]["par"]}<br>Points ${i["rich_stable"]}`
     )
       .style("left", d["clientX"] + 20)
       .style("top", d["clientY"] - 100);
