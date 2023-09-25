@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home,name='home'),
     path('round/', views.round_choice,name='round'),
-    path('scoringread/', views.scoringread,name='scoringread'),
+    path('scoringread/', views.scoringread ,name='scoringread'),
     path('scoringread/<int:round_number>/', views.scoringReadRound,name='scoringreadround'),
     path('scoring/<int:round_number>/', views.scoringview,name='scoringview'),
     path('scoring/', views.scoring,name='scoring'),
