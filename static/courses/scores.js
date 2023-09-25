@@ -121,7 +121,7 @@ async function plot(course, score_type) {
   var mouseover_color = "black";
   var space_width = width / (x_domain.top - x_domain.bottom);
   var bar_width = ((space_width / 4) * 4) / 5;
-  var legend_x = 100 - 2 * bar_width;
+  var legend_x = 100 - 2;
   var legend_y = -20;
   var leg_font_small = 15;
   var leg_font_big = 20;
@@ -558,60 +558,61 @@ async function solo_plot(course, score_type, player) {
   var mouseover_color = "black";
   var space_width = width / (x_domain.top - x_domain.bottom);
   var bar_width = (space_width * 4) / 5;
-  var legend_x = 100 - (2 * bar_width) / 4;
+  var legend_x = 100 ;
+  var legend_y = -20
   var leg_font_small = 15;
   var leg_font_big = 20;
   var trans_dur = 200;
 
   var adam_leg = svg
     .append("circle")
-    .attr("cx", width + margin.right - legend_x)
-    .attr("cy", 130)
+    .attr("cx", width/2 - 2*legend_x)
+    .attr("cy", legend_y)
     .attr("r", 6)
     .style("fill", adam_color);
   var alex_leg = svg
     .append("circle")
-    .attr("cx", width + margin.right - legend_x)
-    .attr("cy", 160)
+    .attr("cx", width/2 - legend_x)
+    .attr("cy", legend_y)
     .attr("r", 6)
     .style("fill", alex_color);
   var jaime_leg = svg
     .append("circle")
-    .attr("cx", width + margin.right - legend_x)
-    .attr("cy", 190)
+    .attr("cx", width/2)
+    .attr("cy", legend_y)
     .attr("r", 6)
     .style("fill", jaime_color);
   var rich_leg = svg
     .append("circle")
-    .attr("cx", width + margin.right - legend_x)
-    .attr("cy", 220)
+    .attr("cx", width/2 + legend_x)
+    .attr("cy", legend_y)
     .attr("r", 6)
     .style("fill", rich_color);
   var adam_text = svg
     .append("text")
-    .attr("x", width + margin.right - legend_x + 20)
-    .attr("y", 130)
+    .attr("x", width/2 - 2*legend_x + 20)
+    .attr("y", legend_y)
     .text("Adam")
     .style("font-size", "15px")
     .attr("alignment-baseline", "middle");
   var alex_text = svg
     .append("text")
-    .attr("x", width + margin.right - legend_x + 20)
-    .attr("y", 160)
+    .attr("x", width/2 - legend_x + 20)
+    .attr("y", legend_y)
     .text("Alex")
     .style("font-size", "15px")
     .attr("alignment-baseline", "middle");
   var jaime_text = svg
     .append("text")
-    .attr("x", width + margin.right - legend_x + 20)
-    .attr("y", 190)
-    .text(`Jaime`)
+    .attr("x", width/2 + 20)
+    .attr("y", legend_y)
+    .text("Jaime")
     .style("font-size", "15px")
     .attr("alignment-baseline", "middle");
   var rich_text = svg
     .append("text")
-    .attr("x", width + margin.right - legend_x + 20)
-    .attr("y", 220)
+    .attr("x", width/2 + legend_x +20)
+    .attr("y", legend_y)
     .text("Rich")
     .style("font-size", "15px")
     .attr("alignment-baseline", "middle");
