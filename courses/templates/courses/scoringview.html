@@ -46,10 +46,10 @@
       <td>{{ hole.hole.yards }}</td>
       <td>{{ hole.hole.par }}</td>
       <td>{{ hole.hole.stroke_index }}</td>
-      <td><input type="text" name="adam" id="" size="3" value="{% if hole.adam %}{{hole.adam}}{% endif %}" min=1 oninput="this.value = Math.abs(this.value)"></td>
-      <td><input type="text" name="alex" id="" size="3" value="{% if hole.alex %}{{hole.alex}}{% endif %}" min="1"></td>
-      <td><input type="text" name="jaime" id="" size="3" value="{% if hole.jaime %}{{hole.jaime}}{% endif %}" min="1"></td>
-      <td><input type="text" name="rich" id="" size="3" value="{% if hole.rich %}{{hole.rich}}{% endif %}" min="1"></td>
+      <td><input type="text" name="adam" inputmode="numeric" pattern="[0-9]*" id="" size="3" value="{% if hole.adam %}{{hole.adam}}{% endif %}" min=1 oninput="this.value = Math.abs(this.value)"></td>
+      <td><input type="text" name="alex" inputmode="numeric" pattern="[0-9]*" id="" size="3" value="{% if hole.alex %}{{hole.alex}}{% endif %}" min="1"></td>
+      <td><input type="text" name="jaime" inputmode="numeric" pattern="[0-9]*" id="" size="3" value="{% if hole.jaime %}{{hole.jaime}}{% endif %}" min="1"></td>
+      <td><input type="text" name="rich" inputmode="numeric" pattern="[0-9]*" id="" size="3" value="{% if hole.rich %}{{hole.rich}}{% endif %}" min="1"></td>
       <td>{% if hole.adam %}{{hole.adam_to_par}}{% endif %}</td>
       <td>{% if hole.adam %}{{hole.adam_stable}}{% endif %}</td>
       <td>{% if hole.alex %}{{hole.alex_to_par}}{% endif %}</td>
