@@ -1,0 +1,28 @@
+{% extends 'courses/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+<select id="round_choice">
+    {% for round in rounds %}
+    <option value="{{round.id}}">{{round.round_number}}</option>
+    {% endfor %}
+</select>
+<select id="player_choice">
+    <option value="all">All Players</option>
+    <option value="adam">Adam</option>
+    <option value="alex">Alex</option>
+    <option value="jaime">Jaime</option>
+    <option value="rich">Rich</option>
+    
+
+</select>
+<select id="scoring_choice">
+    <option value="to_par">To Par</option>
+    <option value="stable">Stableford</option>
+</select>
+</div>
+<div id="div-template"></div>
+<script src="{% static 'courses/d3.v7.js' %}" ></script>
+<script type="module"  src="{% static 'courses/scores.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'courses/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+<select id="course_choice">
+    <option value="Faldo">Faldo</option>
+    <option value="Oconnor">O'Connor</option>
+    <option value="Both">Both</option>
+</select>
+</div>
+<div id="div-template"></div>
+
+<script type="module"  src="{% static 'courses/test.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'courses/base.html' %}
+
+{% block content%}
+<div class="container">
+<br>
+<table class="table table-hover">
+    <thead>
+        <th>Round</th>
+        <th>Adam <br>Par | Stableford</th>
+        <th>Alex <br>Par | Stableford</th>
+        <th>Jaime <br>Par | Stableford</th>
+        <th>Rich <br>Par | Stableford</th>
+    </thead>
+    <tbody>
+    {% for row in each %}
+    <tr>
+        <td><a href="{{forloop.counter}}">{{row.0}}</a></td>
+        <td>{% if row.1 %}{{row.1}} |{% endif %} {% if row.5 %}{{row.5}}{% endif %} </td>
+        <td>{% if row.2 %}{{row.2}} |{% endif %} {% if row.6 %}{{row.6}}{% endif %} </td>
+        <td>{% if row.3 %}{{row.3}} |{% endif %} {% if row.7 %}{{row.7}}{% endif %}</td>
+        <td>{% if row.4 %}{{row.4}} |{% endif %} {% if row.8 %}{{row.8}}{% endif %}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+</div>
+<br>
+{% endblock %}

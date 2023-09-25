@@ -1,0 +1,15 @@
+.axis {font-size: 20;}
+
+body {
+    background-color: #C5DFF8;
+}
+table.table tr td {
+    background-color:#C5DFF8;
+}
+
+go_back {
+    position: absolute;
+    bottom: 10px;
+    width: 50%;
+    border: 3px solid #8AC007;
+  }

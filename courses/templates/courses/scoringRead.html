@@ -1,0 +1,17 @@
+{% extends 'courses/base.html' %}
+
+{% block content%}
+
+<a href="{% url 'home' %}">Home</a><br>
+{% for play in round %}
+<a href="{{play.round_number}}">{{play}}</a>
+
+<br>
+
+
+{% endfor %}
+</form>
+{{hole}}
+
+
+{% endblock %}

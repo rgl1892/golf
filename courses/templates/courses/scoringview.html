@@ -1,0 +1,93 @@
+{% extends 'courses/base.html' %}
+
+{% block content%}
+<div class="container">
+  <p>Handicaps Adam: {{handicap.adam_handicap}}. 
+    Alex: {{handicap.alex_handicap}}. 
+    Jaime: {{handicap.jaime_handicap}}. 
+    Rich: {{handicap.rich_handicap}}. </p>
+
+  {% load static %}
+  <h1>{{round}}</h1>
+  <div class="row">
+    <div class="col-5">
+      <form action="{% url 'edit_score' %}" method="POST">{% csrf_token %}
+      <td><input type="submit" value="Submit"></td>
+      <input type="hidden" name="round" id="round" value="{{round}}">
+
+<table class="table table-hover table-group-divider table-striped-columns">
+  <thead>  
+  <tr>
+      <th>Hole</th>
+      <th>Yards</th>
+      <th>Par</th>
+      <th>S.I.</th>
+      <th>Adam</th>
+      <th>Alex</th>
+      <th>Jaime</th>
+      <th>Rich</th>
+      <th>Adam Par</th>
+      <th>Adam Stbfrd</th>
+      <th>Alex Par</th>
+      <th>Alex Stbfrd</th>
+      <th>Jaime Par</th>
+      <th>Jaime Stbfrd</th>
+      <th>Rich Par</th>
+      <th>Rich Stbfrd</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      
+    {% for hole in card %}
+    
+    <tr>
+      <td>{{ hole.hole.hole }}</td>
+      <td>{{ hole.hole.yards }}</td>
+      <td>{{ hole.hole.par }}</td>
+      <td>{{ hole.hole.stroke_index }}</td>
+      <td><input type="text" name="adam" id="" size="3" value="{% if hole.adam %}{{hole.adam}}{% endif %}" min=1 oninput="this.value = Math.abs(this.value)"></td>
+      <td><input type="text" name="alex" id="" size="3" value="{% if hole.alex %}{{hole.alex}}{% endif %}" min="1"></td>
+      <td><input type="text" name="jaime" id="" size="3" value="{% if hole.jaime %}{{hole.jaime}}{% endif %}" min="1"></td>
+      <td><input type="text" name="rich" id="" size="3" value="{% if hole.rich %}{{hole.rich}}{% endif %}" min="1"></td>
+      <td>{% if hole.adam %}{{hole.adam_to_par}}{% endif %}</td>
+      <td>{% if hole.adam %}{{hole.adam_stable}}{% endif %}</td>
+      <td>{% if hole.alex %}{{hole.alex_to_par}}{% endif %}</td>
+      <td>{% if hole.alex %}{{hole.alex_stable}}{% endif %}</td>
+      <td>{% if hole.jaime %}{{hole.jaime_to_par}}{% endif %}</td>
+      <td>{% if hole.jaime %}{{hole.jaime_stable}}{% endif %}</td>
+      <td>{% if hole.rich %}{{hole.rich_to_par}}{% endif %}</td>
+      <td>{% if hole.rich %}{{hole.rich_stable}}{% endif %}</td>
+      
+   </tr>
+   {% endfor %}
+   <tr>
+    <td>Totals</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>{{total.adam.total}}</td>
+    <td>{{total.alex.total}}</td>
+    <td>{{total.jaime.total}}</td>
+    <td>{{total.rich.total}}</td>
+    <td>{{total.adam.par}}</td>
+    <td>{{total.adam.stable}}</td>
+    <td>{{total.alex.par}}</td>
+    <td>{{total.alex.stable}}</td>
+    <td>{{total.jaime.par}}</td>
+    <td>{{total.jaime.stable}}</td>
+    <td>{{total.rich.par}}</td>
+    <td>{{total.rich.stable}}</td>
+    
+   </tr>
+  </tbody>
+
+  </form>
+ 
+  </div>
+  
+
+  </div>
+  
+</div>
+{% endblock %}
