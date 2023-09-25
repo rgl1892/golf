@@ -39,7 +39,7 @@
       <tbody>
       {% for row in each %}
       <tr>
-          <td><a href="{{forloop.counter}}">Round {{forloop.counter}}</a></td>
+          <td>Round {{forloop.counter}}</td>
           <td>{% if row.1 %}{{row.1}} |{% endif %} {% if row.5 %}{{row.5}}{% endif %} </td>
           <td>{% if row.2 %}{{row.2}} |{% endif %} {% if row.6 %}{{row.6}}{% endif %} </td>
           <td>{% if row.3 %}{{row.3}} |{% endif %} {% if row.7 %}{{row.7}}{% endif %}</td>

@@ -117,7 +117,7 @@ def scoringview(request, round_number):
     return render(request, 'courses/scoringview.html', {'card': data, 'round': round })
 
 
-def scoringReadRound(request, round_number):
+def scoringReadlistRound(request, round_number):
     round = Round.objects.all()[round_number-1]
     data = Scoring.objects.filter(round_number=round)
     total = Scoring.objects.filter(round_number=round).values()
@@ -144,7 +144,7 @@ def scoringReadRound(request, round_number):
             total_table['rich']['par'] += int(row['rich_to_par'])
             total_table['rich']['stable'] += int(row['rich_stable'])
 
-    return render(request, 'courses/scoringReadRound.html', {'card': data, 'round': str(data[0])[:str(data[0]).find(":")], 'total': total_table, })
+    return render(request, 'courses/scoringReadlistRound.html', {'card': data, 'round': str(data[0])[:str(data[0]).find(":")], 'total': total_table, })
 
 
 def scoring(request):
