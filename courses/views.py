@@ -216,9 +216,9 @@ def scoring(request):
     return render(request, 'courses/scoring.html', {'round': round, 'each': each2})
 
 
-def scoringread(request):
+def scoringreadlist(request):
     round = Round.objects.all()
-    return render(request, 'courses/scoringread.html', {'round': round})
+    return render(request, 'courses/scoringreadlist.html', {'round': round})
 
 
 def edit_score(request):
