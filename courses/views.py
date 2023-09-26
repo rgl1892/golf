@@ -8,6 +8,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import permission_required
 
 
+
+
 def home(request):
     course = Hole.objects.all()
 
