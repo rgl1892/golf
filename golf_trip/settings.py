@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=3^59i0#pi3h*zfl3d9(7!z^6nm5hk^g9q#zlux&!4w&(v=v!c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['rgl1892.pythonanywhere.com','127.0.0.1',]
+ALLOWED_HOSTS = ['rgl1892.pythonanywhere.com',]
 
 
 # Application definition
@@ -131,3 +131,8 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    print("Looks like no local file. On Prod")
