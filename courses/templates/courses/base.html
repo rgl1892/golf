@@ -1,4 +1,9 @@
-<link
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
   rel="stylesheet"
   integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
@@ -12,6 +17,12 @@
 ></script>
 {% load static %}
 <link rel="stylesheet" href="{% static 'courses/styles.css' %}" />
+</head>
+<body>
+  
+
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">GolfTrip</a>
@@ -90,3 +101,5 @@
 <div class="bottom container">
   <button onclick="history.back()" class="btn-outline-info">Go Back</button>
 </div>
+</body>
+</html>
