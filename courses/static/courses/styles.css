@@ -13,6 +13,7 @@ table.table tr td {
     overflow: hidden;
     width: initial;
     padding: auto;
+    display: flex;
 }
 
 go_back {
