@@ -9,9 +9,10 @@ table.table tr td {
     background-color:#C5DFF8;
 }
 
-navbar {
+.navbar {
     overflow: hidden;
     width: initial;
+    padding: auto;
 }
 
 go_back {
