@@ -259,24 +259,24 @@ async function mean_plot() {
   };
   var mean_dev_mousemove = function (d, i) {
     Tooltip3.html(`Deviation ${i["deviation"]}`)
-      .style("left", d["clientX"] + 20)
-      .style("top", d["clientY"] - 100);
+      .style("left", d["layerX"] + 20)
+      .style("top", d["layerY"] - 100);
   };
   var mean_mousemove = function (d, i) {
     Tooltip.html(`Mean ${i["score"]}`)
-      .style("left", d["clientX"] + 20)
-      .style("top", d["clientY"] - 100);
+      .style("left", d["layerX"] + 20)
+      .style("top", d["layerY"] - 100);
   };
   var stable_mousemove = function (d, i) {
     Tooltip2.html(`Mean ${i["stable"]}`)
-      .style("left", d["clientX"] + 20)
-      .style("top", d["clientY"] - 100);
+      .style("left", d["layerX"] + 20)
+      .style("top", d["layerY"] - 100);
   };
   var stable_dev_mousemove = function (d, i) {
     Tooltip4.html(`Deviation ${i["stable_deviation"]}`)
-      .style("left", d["clientX"] + 20)
-      .style("top", d["clientY"] - 100);
-    console.log(i);
+      .style("left", d["layerX"] + 20)
+      .style("top", d["layerY"] - 100);
+    console.log(d);
   };
 
   var mean_mouseout = function (d) {
