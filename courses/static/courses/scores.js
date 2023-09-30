@@ -318,7 +318,8 @@ async function plot(course, score_type) {
     .append("g")
     .attr("class", "axis")
     .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x).ticks(18) );
+    .call(d3.axisBottom(x).ticks(18) ).selectAll("text")  
+    .attr("transform", "rotate(65) translate(20,-0)");
 
   svg
     .append("g")
@@ -756,7 +757,8 @@ async function solo_plot(course, score_type, player) {
     .append("g")
     .attr("class", "axis")
     .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x).ticks(18));
+    .call(d3.axisBottom(x).ticks(18)).selectAll("text")  
+    .attr("transform", "rotate(65) translate(20,-0)");
     svg
     .append("g")
     .attr("class", "axis")

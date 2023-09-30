@@ -95,16 +95,30 @@ var mean_data = [
 var hole_mean_data = [];
 
 for (let j = 0; j < 18; j++) {
-  hole_mean_data[j] = {hole:j+1,
-    faldo_score:d3.mean(data.filter((d) => d.hole == `${j+1}` && d.course == 'Faldo'),(d) => d.score),
-    oconnor_score:d3.mean(data.filter((d) => d.hole == `${j+1}` && d.course == 'Oconnor'),(d) => d.score),
+  hole_mean_data[j] = {
+    hole: j + 1,
+    faldo_score: d3.mean(
+      data.filter((d) => d.hole == `${j + 1}` && d.course == "Faldo"),
+      (d) => d.score
+    ),
+    oconnor_score: d3.mean(
+      data.filter((d) => d.hole == `${j + 1}` && d.course == "Oconnor"),
+      (d) => d.score
+    ),
+    faldo_stable: d3.mean(
+        data.filter((d) => d.hole == `${j + 1}` && d.course == "Faldo"),
+        (d) => d.stable
+      ),
+    oconnor_stable: d3.mean(
+        data.filter((d) => d.hole == `${j + 1}` && d.course == "Oconnor"),
+        (d) => d.stable
+      ),
+  };
 }
-}
-console.log(hole_mean_data)
 
 async function mean_plot() {
   var margin = { top: 50, right: 50, bottom: 50, left: 50 },
-    width = 400 - margin.left - margin.right,
+    width = 450 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
   var x_domain = { bottom: 3, top: 5 };
@@ -162,21 +176,11 @@ async function mean_plot() {
     .domain([y_domain.bottom, y_domain.top])
     .range([height, 0]);
 
-  var alex_color = "#50808E";
   var adam_color = "#FCBF49";
-  var jaime_color = "#7EA172";
-  var rich_color = "#C1666B";
-  var alex_color_line = "#70808E";
   var adam_color_line = "#FCBF69";
-  var jaime_color_line = "#7EA192";
-  var rich_color_line = "#C1866B";
   var mouseover_color = "black";
   var space_width = width / (x_domain.top - x_domain.bottom);
   var bar_width = ((space_width / 4) * 4) / 5;
-  var legend_x = 100 - 2;
-  var legend_y = -20;
-  var leg_font_small = 15;
-  var leg_font_big = 20;
   var trans_dur = 200;
 
   var Tooltip = d3
@@ -473,9 +477,37 @@ async function course() {
 
   var x_domain = { bottom: 1, top: 18 };
   var y_domain = { bottom: 0, top: 10 };
+  var y_stable_domain = { bottom: 0, top: 4 };
 
   var svg = d3
     .select("#div-template5")
+    .append("svg")
+    .style("width", width + margin.left + margin.right)
+    .style("height", height + margin.top + margin.bottom)
+    .style("background", "#C5DFF8")
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`)
+    .style("color", "#000");
+  var svg2 = d3
+    .select("#div-template6")
+    .append("svg")
+    .style("width", width + margin.left + margin.right)
+    .style("height", height + margin.top + margin.bottom)
+    .style("background", "#C5DFF8")
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`)
+    .style("color", "#000");
+    var svg3 = d3
+    .select("#div-template7")
+    .append("svg")
+    .style("width", width + margin.left + margin.right)
+    .style("height", height + margin.top + margin.bottom)
+    .style("background", "#C5DFF8")
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`)
+    .style("color", "#000");
+    var svg4 = d3
+    .select("#div-template8")
     .append("svg")
     .style("width", width + margin.left + margin.right)
     .style("height", height + margin.top + margin.bottom)
@@ -492,26 +524,20 @@ async function course() {
     .scaleLinear()
     .domain([y_domain.bottom, y_domain.top])
     .range([height, 0]);
+    var y_stable = d3
+    .scaleLinear()
+    .domain([y_stable_domain.bottom, y_stable_domain.top])
+    .range([height, 0]);
 
-  var alex_color = "#50808E";
   var adam_color = "#FCBF49";
-  var jaime_color = "#7EA172";
-  var rich_color = "#C1666B";
-  var alex_color_line = "#70808E";
   var adam_color_line = "#FCBF69";
-  var jaime_color_line = "#7EA192";
-  var rich_color_line = "#C1866B";
   var mouseover_color = "black";
   var space_width = width / (x_domain.top - x_domain.bottom);
   var bar_width = ((space_width / 4) * 4) / 5;
-  var legend_x = 100 - 2;
-  var legend_y = -20;
-  var leg_font_small = 15;
-  var leg_font_big = 20;
   var trans_dur = 200;
 
   var Tooltip = d3
-    .select("#div-template1")
+    .select("#div-template5")
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
@@ -531,9 +557,9 @@ async function course() {
       .style("stroke-width", "3");
   };
   var rich_mousemove = function (d, i) {
-    Tooltip.html(`Mean ${i["score"]}`)
-      .style("left", d["clientX"] + 20)
-      .style("top", d["clientY"] - 100);
+    Tooltip.html(`${i["faldo_score"]}`)
+      .style("left", d["layerX"] + 20)
+      .style("top", d["layerY"] - 100);
   };
 
   var rich_mouseout = function (d) {
@@ -563,54 +589,123 @@ async function course() {
         ])
         .tickFormat((d) => d)
     );
+  svg2
+    .append("g")
+    .attr("class", "axis")
+    .attr("transform", `translate(${0},0)`)
+    .call(d3.axisLeft(y).ticks(y_domain.top - y_domain.bottom));
+
+  svg2
+    .append("g")
+    .attr("class", "axis")
+    .attr("transform", `translate(0,${height})`)
+    .call(
+      d3
+        .axisBottom(x)
+        .tickValues([
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+        ])
+        .tickFormat((d) => d)
+    );
+    svg3
+    .append("g")
+    .attr("class", "axis")
+    .attr("transform", `translate(${0},0)`)
+    .call(d3.axisLeft(y_stable).tickValues([
+        1, 2, 3, 4,
+      ])
+      .tickFormat((d) => d));
+  svg3
+    .append("g")
+    .attr("class", "axis")
+    .attr("transform", `translate(0,${height})`)
+    .call(
+      d3
+        .axisBottom(x)
+        .tickValues([
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+        ])
+        .tickFormat((d) => d)
+    );
+    svg4
+    .append("g")
+    .attr("class", "axis")
+    .attr("transform", `translate(${0},0)`)
+    .call(d3.axisLeft(y_stable).tickValues([
+        1, 2, 3, 4,
+      ])
+      .tickFormat((d) => d));
+
+  svg4
+    .append("g")
+    .attr("class", "axis")
+    .attr("transform", `translate(0,${height})`)
+    .call(
+      d3
+        .axisBottom(x)
+        .tickValues([
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+        ])
+        .tickFormat((d) => d)
+    );
 
   var g = svg.selectAll(".bars").data(hole_mean_data).enter().append("g");
+  var g2 = svg2.selectAll(".bars").data(hole_mean_data).enter().append("g");
+  var g3 = svg3.selectAll(".bars").data(hole_mean_data).enter().append("g");
+  var g4 = svg4.selectAll(".bars").data(hole_mean_data).enter().append("g");
 
-  var adam = g
+  var faldo = g
     .append("rect")
     .attr("class", "bar-adam")
     .attr("x", (d) => (d.hole / 19) * width)
-    .attr("y", (d) => (-d.faldo_score * height) / 10)
+    .attr("y", (d) => (-d.faldo_score * height) / y_domain.top)
     .attr("width", bar_width)
-    .attr("height", (d) => (d.faldo_score * height) / 10)
+    .attr("height", (d) => (d.faldo_score * height) / y_domain.top)
     .attr("fill", adam_color)
     .attr("stroke", "black")
     .attr("stroke-width", "1")
     .attr("transform", `translate(${-bar_width / 2},${height})`);
 
-  //   var adam_line = d3
-  //     .line()
-  //     .x((d, i) => x(d.hole.hole))
-  //     .y((d, i) => yLeft(d.adam_cum))
-  //     .curve(d3.curveCatmullRom.alpha(0.5));
+  var oconnor = g2
+    .append("rect")
+    .attr("class", "bar-adam")
+    .attr("x", (d) => (d.hole / 19) * width)
+    .attr("y", (d) => (-d.oconnor_score * height) / y_domain.top)
+    .attr("width", bar_width)
+    .attr("height", (d) => (d.oconnor_score * height) / y_domain.top)
+    .attr("fill", adam_color)
+    .attr("stroke", "black")
+    .attr("stroke-width", "1")
+    .attr("transform", `translate(${-bar_width / 2},${height})`);
+    var faldo_stable = g3
+    .append("rect")
+    .attr("class", "bar-adam")
+    .attr("x", (d) => (d.hole / 19) * width)
+    .attr("y", (d) => (-d.faldo_stable * height) / y_stable_domain.top)
+    .attr("width", bar_width)
+    .attr("height", (d) => (d.faldo_stable * height) / y_stable_domain.top)
+    .attr("fill", adam_color)
+    .attr("stroke", "black")
+    .attr("stroke-width", "1")
+    .attr("transform", `translate(${-bar_width / 2},${height})`);
+    var oconnor_stable = g4
+    .append("rect")
+    .attr("class", "bar-adam")
+    .attr("x", (d) => (d.hole / 19) * width)
+    .attr("y", (d) => (-d.oconnor_stable * height) / y_stable_domain.top)
+    .attr("width", bar_width)
+    .attr("height", (d) => (d.oconnor_stable * height) / y_stable_domain.top)
+    .attr("fill", adam_color)
+    .attr("stroke", "black")
+    .attr("stroke-width", "1")
+    .attr("transform", `translate(${-bar_width / 2},${height})`);
 
-  //   var adam_cum = svg
-  //     .append("path")
-  //     .attr("fill", "none")
-  //     .attr("stroke", adam_color_line)
-  //     .attr("stroke-width", 3)
-  //     .attr(
-  //       "d",
-  //       adam_line(scoredataset)
-  //     );
-
-  adam
+  faldo
     .on("mouseover", rich_mouseover)
     .on("mousemove", rich_mousemove)
     .on("mouseout", rich_mouseout);
 }
-
+console.log(hole_mean_data);
 mean_plot();
 course();
-// let btn = document
-//   .getElementById("round_choice")
-//   .addEventListener("change", clickdemo);
 
-// export function clickdemo() {
-//   course = document.getElementById("round_choice").value;
-//   score_type = document.getElementById("scoring_choice").value;
-//   player = document.getElementById("player_choice").value;
-//   window.innerWidth <500 ? solo_plot(course, score_type, player):
-//   plot()
-
-// }
