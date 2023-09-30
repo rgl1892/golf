@@ -10,10 +10,10 @@ table.table tr td {
 }
 
 .navbar {
-    overflow: hidden;
-    width: initial;
+    /* overflow: hidden;
+    width: initial; */
     padding: auto;
-    display: flex;
+    /* display: flex; */
 }
 
 go_back {
