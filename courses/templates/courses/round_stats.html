@@ -1,0 +1,16 @@
+{% extends 'courses/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+
+
+<div class="row">
+<div class="graph" id="div-template1"><span class="text">Mean stroke</span></div>
+<div class="graph" id="div-template2"><span class="text">Mean stableford</span></div>
+
+</div>
+</div>
+<script type="module"  src="{% static 'courses/round_stats.js' %}"></script>
+
+{% endblock %}

@@ -563,6 +563,10 @@ async function solo_plot(course, score_type, player) {
   var leg_font_small = 15;
   var leg_font_big = 20;
   var trans_dur = 200;
+  var alex_color_line = "#50806E";
+  var adam_color_line = "#DCBF49";
+  var jaime_color_line = "#5EA152";
+  var rich_color_line = "#A1866B";
 
   var adam_leg = svg
     .append("circle")
@@ -753,6 +757,11 @@ async function solo_plot(course, score_type, player) {
     .attr("class", "axis")
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(x).ticks(18));
+    svg
+    .append("g")
+    .attr("class", "axis")
+    .attr("transform", `translate(${width+40},0)`)
+    .call(d3.axisRight(yLeft));
 
   var g = svg
     .selectAll(".bars")
@@ -853,6 +862,70 @@ async function solo_plot(course, score_type, player) {
     .attr("stroke", "black")
     .attr("stroke-width", "1")
     .attr("transform", `translate(0,${height})`);
+  
+    var adam_line = d3
+    .line()
+    .x((d, i) => x(d.hole.hole))
+    .y((d, i) => yLeft(score_type == "to_par" ? d.adam_cum : d.adam_cum_stable))
+    .curve(d3.curveCatmullRom.alpha(0.5));
+
+  var adam_cum = svg
+    .append("path")
+    .attr("fill", "none")
+    .attr("stroke", adam_color_line)
+    .attr("stroke-width",  player == "adam" ? 3 : 0)
+    .attr(
+      "d",
+      adam_line(scoredataset.filter((d) => d.round_number.id == course))
+    );
+  var alex_line = d3
+    .line()
+    .x((d, i) => x(d.hole.hole))
+    .y((d, i) => yLeft(score_type == "to_par" ? d.alex_cum : d.alex_cum_stable))
+    .curve(d3.curveCatmullRom.alpha(0.5))
+    ;
+
+  var alex_cum = svg
+    .append("path")
+    .attr("fill", "none")
+    .attr("stroke", alex_color_line)
+    .attr("stroke-width", player == "alex" ? 3 : 0)
+    .attr(
+      "d",
+      alex_line(scoredataset.filter((d) => d.round_number.id == course))
+    );
+  var jaime_line = d3
+    .line()
+    .x((d, i) => x(d.hole.hole))
+    .y((d, i) =>
+      yLeft(score_type == "to_par" ? d.jaime_cum : d.jaime_cum_stable)
+    )
+    .curve(d3.curveCatmullRom.alpha(0.5));
+
+  var jaime_cum = svg
+    .append("path")
+    .attr("fill", "none")
+    .attr("stroke", jaime_color_line)
+    .attr("stroke-width", player == "jaime" ? 3 : 0)
+    .attr(
+      "d",
+      jaime_line(scoredataset.filter((d) => d.round_number.id == course))
+    );
+  var rich_line = d3
+    .line()
+    .x((d, i) => x(d.hole.hole))
+    .y((d, i) => yLeft(score_type == "to_par" ? d.rich_cum : d.rich_cum_stable))
+    .curve(d3.curveCatmullRom.alpha(0.5));
+
+  var rich_cum = svg
+    .append("path")
+    .attr("fill", "none")
+    .attr("stroke", rich_color_line)
+    .attr("stroke-width", player == "rich" ? 3 : 0)
+    .attr(
+      "d",
+      rich_line(scoredataset.filter((d) => d.round_number.id == course))
+    );
 
   adam
     .on("mouseover", adam_mouseover)

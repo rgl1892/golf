@@ -32,6 +32,7 @@ urlpatterns = [
     path('login/', views.logInUser,name='loginuser'),
     path('stats/', views.stats,name='stats'),
     path('score_stats/', views.score_stats,name='score_stats'),
+    path('round_stats/', views.round_stats,name='round_stats'),
 
     #API
     path('api/',include('api.urls')),

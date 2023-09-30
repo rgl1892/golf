@@ -20,7 +20,14 @@ class Round(models.Model):
 
     def __str__(self) -> str:
         return 'Round ' + str(self.round_number) + ' ' + str(self.course) + ' : ' + str(self.tees) + ' tees'
-    
+
+class Player(models.Model):
+    player = models.CharField(max_length=10)
+    handicap_index = models.FloatField()
+
+    def __str__(self) -> str:
+        return self.player
+       
 class Scoring(models.Model):
     round_number = models.ForeignKey(Round,on_delete=models.CASCADE)
     hole = models.ForeignKey(Hole,on_delete=models.CASCADE)
@@ -36,15 +43,11 @@ class Scoring(models.Model):
     alex_to_par = models.IntegerField(null=True,blank=True)
     jaime_to_par = models.IntegerField(null=True,blank=True)
     rich_to_par = models.IntegerField(null=True,blank=True)
+    sandies = models.CharField(max_length=10,default='')
     
 
     def __str__(self) -> str:
         return str(self.round_number) + ' : ' + str(self.hole)
     
-class Player(models.Model):
-    player = models.CharField(max_length=10)
-    handicap_index = models.FloatField()
 
-    def __str__(self) -> str:
-        return self.player
 

@@ -456,3 +456,7 @@ def stats(request):
 def score_stats(request):
     rounds = Round.objects.all()
     return render(request, 'courses/score_stats.html', {'rounds': rounds})
+
+def round_stats(request):
+    rounds = Round.objects.all()
+    return render(request, 'courses/round_stats.html', {'rounds': rounds}) 
