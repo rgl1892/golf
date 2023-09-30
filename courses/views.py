@@ -56,15 +56,38 @@ def home(request):
         else:
             try:
                 adam_sum += row[0]
-                alex_sum += row[1]
-                jaime_sum += row[2]
-                rich_sum += row[3]
-                adam_sum_stable += row[4]
-                alex_sum_stable += row[5]
-                jaime_sum_stable += row[6]
-                rich_sum_stable += row[7]
             except:
                 None
+            try:
+                alex_sum += row[1]
+            except:
+                None
+            try:
+                jaime_sum += row[2]
+            except:
+                None
+            try:
+                rich_sum += row[3]
+            except:
+                None
+            try:
+                adam_sum_stable += row[4]
+            except:
+                None
+            try:
+                alex_sum_stable += row[5]
+            except:
+                None
+            try:
+                jaime_sum_stable += row[5]
+            except:
+                None
+            try:
+                rich_sum_stable += row[5]
+            except:
+                None
+            
+            
     each2.append([course, adam_sum, alex_sum, jaime_sum, rich_sum,
                  adam_sum_stable, alex_sum_stable, jaime_sum_stable, rich_sum_stable])
     each2 = each2[1:]
@@ -202,13 +225,34 @@ def scoring(request):
         else:
             try:
                 adam_sum += row[0]
+            except:
+                None
+            try:
                 alex_sum += row[1]
+            except:
+                None
+            try:
                 jaime_sum += row[2]
+            except:
+                None
+            try:
                 rich_sum += row[3]
+            except:
+                None
+            try:
                 adam_sum_stable += row[4]
+            except:
+                None
+            try:
                 alex_sum_stable += row[5]
-                jaime_sum_stable += row[6]
-                rich_sum_stable += row[7]
+            except:
+                None
+            try:
+                jaime_sum_stable += row[5]
+            except:
+                None
+            try:
+                rich_sum_stable += row[5]
             except:
                 None
     each2.append([course, adam_sum, alex_sum, jaime_sum, rich_sum,
