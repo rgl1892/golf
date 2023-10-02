@@ -705,7 +705,7 @@ async function course() {
     .on("mousemove", rich_mousemove)
     .on("mouseout", rich_mouseout);
 }
-console.log(hole_mean_data);
+console.log('hello');
 mean_plot();
 course();
 
