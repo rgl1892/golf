@@ -39,11 +39,15 @@ go_back {
   }
 
   .login {
-    /* display: grid; */
     width: 200px;
-    /* align-items: center; */
     text-align: center;
     margin: auto;
+  }
+  .logup {
+    width: 200px;
+    text-align: center;
+    margin: auto;
+    /* padding: auto; */
   }
 
   @media 
