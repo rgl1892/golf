@@ -19,7 +19,7 @@
   <thead>  
   <tr>
       <th>Hole</th>
-      <th class="vis">Yards</th>
+      <th>Yards</th>
       <th class="vis">Par</th>
       <th class="vis">S.I.</th>
       <th>Adam</th>
@@ -43,7 +43,7 @@
     
     <tr>
       <td>{{ hole.hole.hole }}</td>
-      <td class="vis">{{ hole.hole.yards }}</td>
+      <td>{{ hole.hole.yards }}</td>
       <td class="vis">{{ hole.hole.par }}</td>
       <td class="vis">{{ hole.hole.stroke_index }}</td>
       <td><input type="text" name="adam" inputmode="numeric" pattern="[0-9]*" id="" size="3" value="{% if hole.adam %}{{hole.adam}}{% endif %}" min=1 oninput="this.value = Math.abs(this.value)"></td>
@@ -63,7 +63,7 @@
    {% endfor %}
    <tr>
     <td>Totals</td>
-    <td class="vis"></td>
+    <td></td>
     <td class="vis"></td>
     <td class="vis"></td>
     <td>{{total.adam.total}}</td>

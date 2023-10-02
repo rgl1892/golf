@@ -19,14 +19,14 @@
       <th>Alex</th>
       <th>Jaime</th>
       <th>Rich</th>
-      <th>Adam Par</th>
-      <th>Adam Stbfrd</th>
-      <th>Alex Par</th>
-      <th>Alex Stbfrd</th>
-      <th>Jaime Par</th>
-      <th>Jaime Stbfrd</th>
-      <th>Rich Par</th>
-      <th>Rich Stbfrd</th>
+      <th class="vis">Adam Par</th>
+      <th class="vis">Adam Stbfrd</th>
+      <th class="vis">Alex Par</th>
+      <th class="vis">Alex Stbfrd</th>
+      <th class="vis">Jaime Par</th>
+      <th class="vis">Jaime Stbfrd</th>
+      <th class="vis">Rich Par</th>
+      <th class="vis">Rich Stbfrd</th>
     </tr>
   </thead>
   <tbody>
@@ -43,14 +43,14 @@
       <td>{% if hole.alex %}{{hole.alex}}{% endif %}</td>
       <td>{% if hole.jaime %}{{hole.jaime}}{% endif %}</td>
       <td>{% if hole.rich %}{{hole.rich}}{% endif %}</td>
-      <td>{% if hole.adam %}{{hole.adam_to_par}}{% endif %}</td>
-      <td>{% if hole.adam %}{{hole.adam_stable}}{% endif %}</td>
-      <td>{% if hole.alex %}{{hole.alex_to_par}}{% endif %}</td>
-      <td>{% if hole.alex %}{{hole.alex_stable}}{% endif %}</td>
-      <td>{% if hole.jaime %}{{hole.jaime_to_par}}{% endif %}</td>
-      <td>{% if hole.jaime %}{{hole.jaime_stable}}{% endif %}</td>
-      <td>{% if hole.rich %}{{hole.rich_to_par}}{% endif %}</td>
-      <td>{% if hole.rich %}{{hole.rich_stable}}{% endif %}</td>
+      <td class="vis">{% if hole.adam %}{{hole.adam_stable}}{% endif %}</td>
+      <td class="vis">{% if hole.alex %}{{hole.alex_to_par}}{% endif %}</td>
+      <td class="vis">{% if hole.adam %}{{hole.adam_to_par}}{% endif %}</td>
+      <td class="vis">{% if hole.alex %}{{hole.alex_stable}}{% endif %}</td>
+      <td class="vis">{% if hole.jaime %}{{hole.jaime_to_par}}{% endif %}</td>
+      <td class="vis">{% if hole.jaime %}{{hole.jaime_stable}}{% endif %}</td>
+      <td class="vis">{% if hole.rich %}{{hole.rich_to_par}}{% endif %}</td>
+      <td class="vis">{% if hole.rich %}{{hole.rich_stable}}{% endif %}</td>
       
    </tr>
    {% endfor %}
