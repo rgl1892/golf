@@ -1,6 +1,5 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 var scoredataset = await d3.json("/api/scorecards");
-console.log(scoredataset);
 var data = [];
 for (let i = 0; i < scoredataset.length; i++) {
   data.push({
@@ -705,7 +704,6 @@ async function course() {
     .on("mousemove", rich_mousemove)
     .on("mouseout", rich_mouseout);
 }
-console.log('hello');
 mean_plot();
 course();
 
