@@ -28,18 +28,18 @@
   </div>
   <div class="col-1"></div>
   <div class="col-12 col-md-4">
-    <table class="table table-hover table-sm">
+    <table class="table table-hover table-responsive">
       <thead>
-          <th>Round</th>
-          <th>Adam <br>Par | Stableford</th>
-          <th>Alex <br>Par | Stableford</th>
-          <th>Jaime <br>Par | Stableford</th>
-          <th>Rich <br>Par | Stableford</th>
+          <th class="vis">Round</th>
+          <th>Adam <br><span class="vis">Par | Stableford</span></th>
+          <th>Alex <br><span class="vis">Par | Stableford</span></th>
+          <th>Jaime <br><span class="vis">Par | Stableford</span></th>
+          <th>Rich <br><span class="vis">Par | Stableford</span></th>
       </thead>
       <tbody>
       {% for row in each %}
       <tr>
-          <td>Round {{forloop.counter}}</td>
+          <td class="vis">Round {{forloop.counter}}</td>
           <td>{% if row.1 %}{{row.1}} |{% endif %} {% if row.5 %}{{row.5}}{% endif %} </td>
           <td>{% if row.2 %}{{row.2}} |{% endif %} {% if row.6 %}{{row.6}}{% endif %} </td>
           <td>{% if row.3 %}{{row.3}} |{% endif %} {% if row.7 %}{{row.7}}{% endif %}</td>
