@@ -9,9 +9,11 @@ table.table tr td {
     background-color:#C5DFF8;
 }
 
-navbar {
-    overflow: hidden;
-    width: initial;
+.navbar {
+    /* overflow: hidden;
+    width: initial; */
+    padding: auto;
+    /* display: flex; */
 }
 
 go_back {
@@ -35,3 +37,13 @@ go_back {
   .box {
     display: flex;
   }
+
+
+  @media 
+  only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 800px)  {
+    .vis {
+      display: none;
+    }
+  }
+  

@@ -76,7 +76,6 @@ async function plot(val) {
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(x).ticks(18))
         .selectAll("text")  
-    //  .style("text-anchor", "end")
      .attr("transform", "rotate(65) translate(20,-0)");
 
         if (val == 'Both') {
