@@ -38,6 +38,13 @@ go_back {
     display: flex;
   }
 
+  .login {
+    /* display: grid; */
+    width: 200px;
+    /* align-items: center; */
+    text-align: center;
+    margin: auto;
+  }
 
   @media 
   only screen and (max-width: 600px)  {
