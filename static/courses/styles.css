@@ -49,6 +49,9 @@ go_back {
     margin: auto;
     /* padding: auto; */
   }
+  .center {
+    margin: auto;
+  }
 
   @media 
   only screen and (max-width: 600px)  {
