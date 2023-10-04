@@ -1,10 +1,6 @@
-{% for vid in vids %}
-{{vid.title}}
+{% for vid in vids %} {{vid.title}}
 <video height="300px" preload controls>
-    <source src="{{vid.video.url}}" type="video/mp4">
+  <source src="{{vid.video.url}}" type="video/mp4" />
 </video>
-
-
-
 
 {% endfor %}
