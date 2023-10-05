@@ -55,6 +55,7 @@ go_back {
 
   .player {
     width: 75vw;
+    max-width: 400px;
   }
 
   @media 
