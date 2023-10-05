@@ -79,11 +79,11 @@ def home(request):
             except:
                 None
             try:
-                jaime_sum_stable += row[5]
+                jaime_sum_stable += row[6]
             except:
                 None
             try:
-                rich_sum_stable += row[5]
+                rich_sum_stable += row[7]
             except:
                 None
             
@@ -257,11 +257,11 @@ def scoring(request):
             except:
                 None
             try:
-                jaime_sum_stable += row[5]
+                jaime_sum_stable += row[6]
             except:
                 None
             try:
-                rich_sum_stable += row[5]
+                rich_sum_stable += row[7]
             except:
                 None
     each2.append([course, adam_sum, alex_sum, jaime_sum, rich_sum,
@@ -307,6 +307,9 @@ def edit_score(request):
         '-2': 4,
         '-3': 5,
         '-4': 6,
+        '-5': 7,
+        '-6': 8,
+        '-7': 9,
     }
 
     # create the tables for each player. There must be a better way to this this, rather than
