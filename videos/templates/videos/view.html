@@ -1,12 +1,16 @@
 {% extends 'courses/base.html' %}
 
 {% block content%}
+<div class="container">
 
-{% for vid in vids %} {{vid.title}}
-<video height="300px" preload controls>
+{% for vid in vids %} <h2>{{vid.title}}</h2>
+<br>
+
+<video preload controls class="player">
   <source src="{{vid.video.url}}" type="video/mp4" />
 </video>
 
+<br>
 {% endfor %}
-
+</div>
 {% endblock %}
