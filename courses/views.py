@@ -40,7 +40,7 @@ def home(request):
     rich_sum_stable = 0
 
     for row in each:
-
+        
         if course != row[8]:
             each2.append([course, adam_sum, alex_sum, jaime_sum, rich_sum,
                           adam_sum_stable, alex_sum_stable, jaime_sum_stable, rich_sum_stable])
@@ -91,8 +91,17 @@ def home(request):
     each2.append([course, adam_sum, alex_sum, jaime_sum, rich_sum,
                  adam_sum_stable, alex_sum_stable, jaime_sum_stable, rich_sum_stable])
     each2 = each2[1:]
+    adam = [value[5] for value in each2]
+    alex = [value[6] for value in each2]
+    jaime = [value[7] for value in each2]
+    rich = [value[8] for value in each2]
+    adam = sum(sorted([i for i in adam if i != None])[-3:])
+    alex = sum(sorted([i for i in alex if i != None])[-3:])
+    jaime = sum(sorted([i for i in jaime if i != None])[-3:])
+    rich = sum(sorted([i for i in rich if i != None])[-3:])
+    totals = [adam,alex,jaime,rich]
 
-    return render(request, 'courses/home.html', {'courses': course, 'names': names, 'edit_rights': rights,'each': each2})
+    return render(request, 'courses/home.html', {'courses': course, 'names': names, 'edit_rights': rights,'each': each2,'total':totals})
 
 
 def round_choice(request):
