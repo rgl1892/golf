@@ -1,4 +1,4 @@
-import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+// import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 var scoredataset = await d3.json("/api/scorecards");
 var data = [];
 for (let i = 0; i < scoredataset.length; i++) {
@@ -105,13 +105,13 @@ for (let j = 0; j < 18; j++) {
       (d) => d.score
     ),
     faldo_stable: d3.mean(
-        data.filter((d) => d.hole == `${j + 1}` && d.course == "Faldo"),
-        (d) => d.stable
-      ),
+      data.filter((d) => d.hole == `${j + 1}` && d.course == "Faldo"),
+      (d) => d.stable
+    ),
     oconnor_stable: d3.mean(
-        data.filter((d) => d.hole == `${j + 1}` && d.course == "Oconnor"),
-        (d) => d.stable
-      ),
+      data.filter((d) => d.hole == `${j + 1}` && d.course == "Oconnor"),
+      (d) => d.stable
+    ),
   };
 }
 
@@ -261,22 +261,22 @@ async function mean_plot() {
       .style("stroke-width", "3");
   };
   var mean_dev_mousemove = function (d, i) {
-    Tooltip3.html(`Deviation ${i["deviation"]}`)
+    Tooltip3.html(`${i["deviation"]}`)
       .style("left", d["layerX"] + 20)
       .style("top", d["layerY"] - 100);
   };
   var mean_mousemove = function (d, i) {
-    Tooltip.html(`Mean ${i["score"]}`)
+    Tooltip.html(`${i["score"]}`)
       .style("left", d["layerX"] + 20)
       .style("top", d["layerY"] - 100);
   };
   var stable_mousemove = function (d, i) {
-    Tooltip2.html(`Mean ${i["stable"]}`)
+    Tooltip2.html(`${i["stable"]}`)
       .style("left", d["layerX"] + 20)
       .style("top", d["layerY"] - 100);
   };
   var stable_dev_mousemove = function (d, i) {
-    Tooltip4.html(`Deviation ${i["stable_deviation"]}`)
+    Tooltip4.html(`${i["stable_deviation"]}`)
       .style("left", d["layerX"] + 20)
       .style("top", d["layerY"] - 100);
     console.log(d);
@@ -496,7 +496,7 @@ async function course() {
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`)
     .style("color", "#000");
-    var svg3 = d3
+  var svg3 = d3
     .select("#div-template7")
     .append("svg")
     .style("width", width + margin.left + margin.right)
@@ -505,7 +505,7 @@ async function course() {
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`)
     .style("color", "#000");
-    var svg4 = d3
+  var svg4 = d3
     .select("#div-template8")
     .append("svg")
     .style("width", width + margin.left + margin.right)
@@ -523,7 +523,7 @@ async function course() {
     .scaleLinear()
     .domain([y_domain.bottom, y_domain.top])
     .range([height, 0]);
-    var y_stable = d3
+  var y_stable = d3
     .scaleLinear()
     .domain([y_stable_domain.bottom, y_stable_domain.top])
     .range([height, 0]);
@@ -547,7 +547,7 @@ async function course() {
     .style("padding", "5px")
     .style("position", "absolute");
 
-  var rich_mouseover = function (d, i) {
+  var faldo_stroke_mouseover = function (d, i) {
     Tooltip.style("opacity", 1).style("z-index", 1000);
     d3.select(this)
       .transition()
@@ -555,13 +555,79 @@ async function course() {
       .style("fill", mouseover_color)
       .style("stroke-width", "3");
   };
-  var rich_mousemove = function (d, i) {
+  var faldo_stroke_mousemove = function (d, i) {
     Tooltip.html(`${i["faldo_score"]}`)
       .style("left", d["layerX"] + 20)
       .style("top", d["layerY"] - 100);
   };
 
-  var rich_mouseout = function (d) {
+  var faldo_stroke_mouseout = function (d) {
+    Tooltip.style("opacity", 0).style("z-index", "auto");
+    d3.select(this)
+      .transition()
+      .duration(trans_dur)
+      .style("fill", adam_color)
+      .style("stroke-width", "1");
+  };
+  var faldo_stable_mouseover = function (d, i) {
+    Tooltip.style("opacity", 1).style("z-index", 1000);
+    d3.select(this)
+      .transition()
+      .duration(trans_dur)
+      .style("fill", mouseover_color)
+      .style("stroke-width", "3");
+  };
+  var faldo_stable_mousemove = function (d, i) {
+    Tooltip.html(`${i["faldo_stable"]}`)
+      .style("left", d["layerX"] + 20)
+      .style("top", d["layerY"] - 100);
+  };
+
+  var faldo_stable_mouseout = function (d) {
+    Tooltip.style("opacity", 0).style("z-index", "auto");
+    d3.select(this)
+      .transition()
+      .duration(trans_dur)
+      .style("fill", adam_color)
+      .style("stroke-width", "1");
+  };
+  var oconnor_stroke_mouseover = function (d, i) {
+    Tooltip.style("opacity", 1).style("z-index", 1000);
+    d3.select(this)
+      .transition()
+      .duration(trans_dur)
+      .style("fill", mouseover_color)
+      .style("stroke-width", "3");
+  };
+  var oconnor_stroke_mousemove = function (d, i) {
+    Tooltip.html(`${i["oconnor_score"]}`)
+      .style("left", d["layerX"] + 20)
+      .style("top", d["layerY"] - 100);
+  };
+
+  var oconnor_stroke_mouseout = function (d) {
+    Tooltip.style("opacity", 0).style("z-index", "auto");
+    d3.select(this)
+      .transition()
+      .duration(trans_dur)
+      .style("fill", adam_color)
+      .style("stroke-width", "1");
+  };
+  var oconnor_stable_mouseover = function (d, i) {
+    Tooltip.style("opacity", 1).style("z-index", 1000);
+    d3.select(this)
+      .transition()
+      .duration(trans_dur)
+      .style("fill", mouseover_color)
+      .style("stroke-width", "3");
+  };
+  var oconnor_stable_mousemove = function (d, i) {
+    Tooltip.html(`${i["oconnor_stable"]}`)
+      .style("left", d["layerX"] + 20)
+      .style("top", d["layerY"] - 100);
+  };
+
+  var oconnor_stable_mouseout = function (d) {
     Tooltip.style("opacity", 0).style("z-index", "auto");
     d3.select(this)
       .transition()
@@ -606,14 +672,16 @@ async function course() {
         ])
         .tickFormat((d) => d)
     );
-    svg3
+  svg3
     .append("g")
     .attr("class", "axis")
     .attr("transform", `translate(${0},0)`)
-    .call(d3.axisLeft(y_stable).tickValues([
-        1, 2, 3, 4,
-      ])
-      .tickFormat((d) => d));
+    .call(
+      d3
+        .axisLeft(y_stable)
+        .tickValues([1, 2, 3, 4])
+        .tickFormat((d) => d)
+    );
   svg3
     .append("g")
     .attr("class", "axis")
@@ -626,14 +694,16 @@ async function course() {
         ])
         .tickFormat((d) => d)
     );
-    svg4
+  svg4
     .append("g")
     .attr("class", "axis")
     .attr("transform", `translate(${0},0)`)
-    .call(d3.axisLeft(y_stable).tickValues([
-        1, 2, 3, 4,
-      ])
-      .tickFormat((d) => d));
+    .call(
+      d3
+        .axisLeft(y_stable)
+        .tickValues([1, 2, 3, 4])
+        .tickFormat((d) => d)
+    );
 
   svg4
     .append("g")
@@ -676,7 +746,7 @@ async function course() {
     .attr("stroke", "black")
     .attr("stroke-width", "1")
     .attr("transform", `translate(${-bar_width / 2},${height})`);
-    var faldo_stable = g3
+  var faldo_stable = g3
     .append("rect")
     .attr("class", "bar-adam")
     .attr("x", (d) => (d.hole / 19) * width)
@@ -687,7 +757,7 @@ async function course() {
     .attr("stroke", "black")
     .attr("stroke-width", "1")
     .attr("transform", `translate(${-bar_width / 2},${height})`);
-    var oconnor_stable = g4
+  var oconnor_stable = g4
     .append("rect")
     .attr("class", "bar-adam")
     .attr("x", (d) => (d.hole / 19) * width)
@@ -700,10 +770,21 @@ async function course() {
     .attr("transform", `translate(${-bar_width / 2},${height})`);
 
   faldo
-    .on("mouseover", rich_mouseover)
-    .on("mousemove", rich_mousemove)
-    .on("mouseout", rich_mouseout);
+    .on("mouseover", faldo_stroke_mouseover)
+    .on("mousemove", faldo_stroke_mousemove)
+    .on("mouseout", faldo_stroke_mouseout);
+  faldo_stable
+    .on("mouseover", faldo_stable_mouseover)
+    .on("mousemove", faldo_stable_mousemove)
+    .on("mouseout", faldo_stable_mouseout);
+  oconnor
+    .on("mouseover", oconnor_stroke_mouseover)
+    .on("mousemove", oconnor_stroke_mousemove)
+    .on("mouseout", oconnor_stroke_mouseout);
+  oconnor_stable
+    .on("mouseover", oconnor_stable_mouseover)
+    .on("mousemove", oconnor_stable_mousemove)
+    .on("mouseout", oconnor_stable_mouseout);
 }
 mean_plot();
 course();
-
