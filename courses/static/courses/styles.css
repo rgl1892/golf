@@ -57,10 +57,16 @@ go_back {
     width: 500px;
   }
 
+
   @media 
   only screen and (max-width: 600px)  {
     .vis {
       display: none;
+    }
+    .hid{
+      display: flex !important;
+      margin: auto;
+      text-align: center;
     }
     .player {
       width: 75vw;;
