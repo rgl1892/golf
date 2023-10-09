@@ -4,7 +4,7 @@
 <div class="container">
 
 {% for vid in vids %} <h2>{{vid.title}}</h2>
-<h5>{{vid.id}}</h5>
+<h5>{{forloop.counter}}</h5>
 <br>
 
 <video preload controls class="player">
