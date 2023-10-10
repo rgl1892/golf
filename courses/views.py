@@ -95,11 +95,15 @@ def home(request):
     alex = [value[6] for value in each2]
     jaime = [value[7] for value in each2]
     rich = [value[8] for value in each2]
-    adam = sum(sorted([i for i in adam if i != None])[-3:])
-    alex = sum(sorted([i for i in alex if i != None])[-3:])
-    jaime = sum(sorted([i for i in jaime if i != None])[-3:])
-    rich = sum(sorted([i for i in rich if i != None])[-3:])
-    totals = [adam,alex,jaime,rich]
+    adam_ock = sum(sorted([i for i in adam if i != None])[-3:])
+    alex_ock = sum(sorted([i for i in alex if i != None])[-3:])
+    jaime_ock = sum(sorted([i for i in jaime if i != None])[-3:])
+    rich_ock = sum(sorted([i for i in rich if i != None])[-3:])
+    adam_all = sum(sorted([i for i in adam if i != None]))
+    alex_all = sum(sorted([i for i in alex if i != None]))
+    jaime_all = sum(sorted([i for i in jaime if i != None]))
+    rich_all = sum(sorted([i for i in rich if i != None]))
+    totals = [adam_ock,alex_ock,jaime_ock,rich_ock,adam_all,alex_all,jaime_all,rich_all]
 
     return render(request, 'courses/home.html', {'courses': course, 'names': names, 'edit_rights': rights,'each': each2,'total':totals})
 
