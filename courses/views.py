@@ -272,7 +272,9 @@ def scoring(request):
                  adam_sum_stable, alex_sum_stable, jaime_sum_stable, rich_sum_stable])
     each2 = each2[1:]
 
-    return render(request, 'courses/scoring.html', {'round': round, 'each': each2})
+    pair = Round.objects.all()
+
+    return render(request, 'courses/scoring.html', {'round': round, 'each': each2,'pair':pair})
 
 
 def scoringreadlist(request):
@@ -302,6 +304,7 @@ def edit_score(request):
         'jaime_index': Player.objects.all()[2].handicap_index,
         'rich_index': Player.objects.all()[3].handicap_index,
     }
+    pairs = round_choice.pair
 
     stableford_points = {
         '2': 0,
@@ -419,15 +422,43 @@ def edit_score(request):
             data.rich = None
             data.rich_stable = None
             data.rich_to_par = None
-        data.save()
 
+        if pairs == 'Adam & Alex':
+            a_team_name = 'Adam & Alex'
+            b_team_name = 'Jaime & Rich'
+            a_team = sorted([data.adam_stable,data.alex_stable])[-1]
+            b_team = sorted([data.jaime_stable,data.rich_stable])[-1]                
+        elif pairs == 'Adam & Jaime':
+            a_team_name = 'Adam & Jaime'
+            b_team_name = 'Alex & Rich'
+            a_team = sorted([data.adam_stable,data.jaime_stable])[-1]
+            b_team = sorted([data.alex_stable,data.rich_stable])[-1]
+        else:
+            a_team_name = 'Adam & Rich'
+            b_team_name = 'Jaime & Alex'
+            a_team = sorted([data.adam_stable,data.rich_stable])[-1]
+            b_team = sorted([data.jaime_stable,data.alex_stable])[-1]
+        if a_team > b_team:
+            data.match_play = +1
+        elif a_team < b_team:
+            data.match_play = -1
+        else:
+            data.match_play = 0
+        teams = [a_team_name,b_team_name]
+        data.better_ball_team_a = a_team
+        data.better_ball_team_b = b_team
+        data.save()
+    
+ 
     # create totals at bottom of table
 
     total = Scoring.objects.filter(round_number=round_choice).values()
     total_table = {'adam': {'total': 0, 'par': 0, 'stable': 0},
                    'alex': {'total': 0, 'par': 0, 'stable': 0},
                    'jaime': {'total': 0, 'par': 0, 'stable': 0},
-                   'rich': {'total': 0, 'par': 0, 'stable': 0}}
+                   'rich': {'total': 0, 'par': 0, 'stable': 0}
+                   ,'match_play':0,'team_a':0,'team_b':0}
+    
 
     for row in total:
         if row['adam']:
@@ -446,6 +477,11 @@ def edit_score(request):
             total_table['rich']['total'] += int(row['rich'])
             total_table['rich']['par'] += int(row['rich_to_par'])
             total_table['rich']['stable'] += int(row['rich_stable'])
+        total_table['match_play']  += row['match_play']
+        total_table['team_a']  += row['better_ball_team_a']
+        total_table['team_b']  += row['better_ball_team_b']
+
+        
 
     playing_handicap = {
         'adam_handicap': round(handicap_index['adam_index']*(slope_rating/113)*0.95),
@@ -457,7 +493,7 @@ def edit_score(request):
     data = Scoring.objects.filter(round_number=round_choice)
     hole = hole.stroke_index
     return render(request, 'courses/scoringview.html', {'card': data, 'round': round_choice, 'total': total_table, 'handicap': playing_handicap,
-                                                        'log': log, 'tees': tees})
+                                                        'log': log, 'tees': tees,'teams':teams})
 
 
 def signUpUser(request):

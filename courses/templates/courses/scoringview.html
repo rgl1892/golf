@@ -1,6 +1,7 @@
 {% extends 'courses/base.html' %}
 
 {% block content%}
+
 <div class="container">
   <p>Handicaps Adam: {{handicap.adam_handicap}}. 
     Alex: {{handicap.alex_handicap}}. 
@@ -34,6 +35,9 @@
       <th class="vis">Jaime Stbfrd</th>
       <th class="vis">Rich Par</th>
       <th class="vis">Rich Stbfrd</th>
+      <th>Match Play</th>
+      <th>{{teams.0}}</th>
+      <th>{{teams.1}}</th>
     </tr>
   </thead>
   <tbody>
@@ -54,6 +58,9 @@
       <td class="vis">{{total.jaime.stable}}</td>
       <td class="vis">{{total.rich.par}}</td>
       <td class="vis">{{total.rich.stable}}</td>
+      <td>{{total.match_play}}</td>
+      <td>{{total.team_a}}</td>
+      <td>{{total.team_b}}</td>
       
      </tr>
     
@@ -77,6 +84,10 @@
       <td class="vis">{% if hole.jaime %}{{hole.jaime_stable}}{% endif %}</td>
       <td class="vis">{% if hole.rich %}{{hole.rich_to_par}}{% endif %}</td>
       <td class="vis">{% if hole.rich %}{{hole.rich_stable}}{% endif %}</td>
+      <td class="vis">{{hole.match_play}}</td>
+      <td class="vis">{{hole.better_ball_team_a}}</td>
+      <td class="vis">{{hole.better_ball_team_b}}</td>
+
       
    </tr>
    {% endfor %}
@@ -97,6 +108,9 @@
     <th class="vis">Jaime Stbfrd</th>
     <th class="vis">Rich Par</th>
     <th class="vis">Rich Stbfrd</th>
+    <th>Match Play</th>
+    <th>{{teams.0}}</th>
+    <th>{{teams.1}}</th>
   </tr>
    <tr>
     <td>Totals</td>
@@ -115,6 +129,9 @@
     <td class="vis">{{total.jaime.stable}}</td>
     <td class="vis">{{total.rich.par}}</td>
     <td class="vis">{{total.rich.stable}}</td>
+    <td>{{total.match_play}}</td>
+    <td>{{total.team_a}}</td>
+    <td>{{total.team_b}}</td>
     
    </tr>
   </tbody>
