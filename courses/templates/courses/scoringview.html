@@ -35,7 +35,8 @@
       <th class="vis">Jaime Stbfrd</th>
       <th class="vis">Rich Par</th>
       <th class="vis">Rich Stbfrd</th>
-      <th>Match Play</th>
+      <th>Match Play Result</th>
+      <th>Match Play Total</th>
       <th>{{teams.0}}</th>
       <th>{{teams.1}}</th>
     </tr>
@@ -59,6 +60,7 @@
       <td class="vis">{{total.rich.par}}</td>
       <td class="vis">{{total.rich.stable}}</td>
       <td>{{total.match_play}}</td>
+      <td>{{total.match_play_total}}</td>
       <td>{{total.team_a}}</td>
       <td>{{total.team_b}}</td>
       
@@ -85,6 +87,7 @@
       <td class="vis">{% if hole.rich %}{{hole.rich_to_par}}{% endif %}</td>
       <td class="vis">{% if hole.rich %}{{hole.rich_stable}}{% endif %}</td>
       <td class="vis">{{hole.match_play}}</td>
+      <td class="vis">{{hole.match_play_total}}</td>
       <td class="vis">{{hole.better_ball_team_a}}</td>
       <td class="vis">{{hole.better_ball_team_b}}</td>
 
@@ -108,7 +111,8 @@
     <th class="vis">Jaime Stbfrd</th>
     <th class="vis">Rich Par</th>
     <th class="vis">Rich Stbfrd</th>
-    <th>Match Play</th>
+    <th>Match Play Result</th>
+    <th>Match Play Total</th>
     <th>{{teams.0}}</th>
     <th>{{teams.1}}</th>
   </tr>
@@ -130,6 +134,7 @@
     <td class="vis">{{total.rich.par}}</td>
     <td class="vis">{{total.rich.stable}}</td>
     <td>{{total.match_play}}</td>
+    <td>{{total.match_play_total}}</td>
     <td>{{total.team_a}}</td>
     <td>{{total.team_b}}</td>
     

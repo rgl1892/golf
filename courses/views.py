@@ -156,13 +156,15 @@ def scoringview(request, round_number):
 
 
 def scoringReadlistRound(request, round_number):
-    round = Round.objects.all()[round_number-1]
-    data = Scoring.objects.filter(round_number=round)
-    total = Scoring.objects.filter(round_number=round).values()
+    round_choice = Round.objects.all()[round_number-1]
+    data = Scoring.objects.filter(round_number=round_choice)
+    total = Scoring.objects.filter(round_number=round_choice).values()
     total_table = {'adam': {'total': 0, 'par': 0, 'stable': 0},
                    'alex': {'total': 0, 'par': 0, 'stable': 0},
                    'jaime': {'total': 0, 'par': 0, 'stable': 0},
-                   'rich': {'total': 0, 'par': 0, 'stable': 0}}
+                   'rich': {'total': 0, 'par': 0, 'stable': 0},
+                   'match_play':0,'team_a':0,'team_b':0,
+                   'match_play_total':0}
 
     for row in total:
         if row['adam']:
@@ -181,8 +183,23 @@ def scoringReadlistRound(request, round_number):
             total_table['rich']['total'] += int(row['rich'])
             total_table['rich']['par'] += int(row['rich_to_par'])
             total_table['rich']['stable'] += int(row['rich_stable'])
+        total_table['match_play']  += row['match_play']
+        total_table['team_a']  += row['better_ball_team_a']
+        total_table['team_b']  += row['better_ball_team_b']
+        total_table['match_play_total'] = total_table['match_play_total'] + row['match_play']
+    pairs = round_choice.pair
+    if pairs == 'Adam & Alex':
+        a_team_name = 'Adam & Alex'
+        b_team_name = 'Jaime & Rich'               
+    elif pairs == 'Adam & Jaime':
+        a_team_name = 'Adam & Jaime'
+        b_team_name = 'Alex & Rich'
+    else:
+        a_team_name = 'Adam & Rich'
+        b_team_name = 'Jaime & Alex'
+    teams = [a_team_name,b_team_name]
 
-    return render(request, 'courses/scoringReadlistRound.html', {'card': data, 'round': str(data[0])[:str(data[0]).find(":")], 'total': total_table, })
+    return render(request, 'courses/scoringReadlistRound.html', {'card': data, 'round': str(data[0])[:str(data[0]).find(":")], 'total': total_table,'teams':teams })
 
 
 def scoring(request):
@@ -332,6 +349,12 @@ def edit_score(request):
 
         hole = Hole.objects.filter(tees=tees, course=course, hole=index)[0]
         data = Scoring.objects.get(round_number=round_choice, hole=hole)
+        try:
+            prev_hole = Hole.objects.filter(tees=tees, course=course, hole=index-1)[0]
+            prev_data = Scoring.objects.get(round_number=round_choice, hole=prev_hole)
+        except:
+            prev_hole = None
+            prev_data = None
         if score[0]:
             data.adam = score[0]
             data.adam_to_par = int(score[0]) - int(hole.par)
@@ -447,8 +470,15 @@ def edit_score(request):
         teams = [a_team_name,b_team_name]
         data.better_ball_team_a = a_team
         data.better_ball_team_b = b_team
+        try:
+            data.match_play_total = prev_data.match_play_total + data.match_play
+        except:
+            data.match_play_total = data.match_play
+
+        
         data.save()
     
+
  
     # create totals at bottom of table
 
@@ -456,9 +486,9 @@ def edit_score(request):
     total_table = {'adam': {'total': 0, 'par': 0, 'stable': 0},
                    'alex': {'total': 0, 'par': 0, 'stable': 0},
                    'jaime': {'total': 0, 'par': 0, 'stable': 0},
-                   'rich': {'total': 0, 'par': 0, 'stable': 0}
-                   ,'match_play':0,'team_a':0,'team_b':0}
-    
+                   'rich': {'total': 0, 'par': 0, 'stable': 0},
+                   'match_play':0,'team_a':0,'team_b':0,
+                   'match_play_total':0}
 
     for row in total:
         if row['adam']:
@@ -477,9 +507,10 @@ def edit_score(request):
             total_table['rich']['total'] += int(row['rich'])
             total_table['rich']['par'] += int(row['rich_to_par'])
             total_table['rich']['stable'] += int(row['rich_stable'])
-        total_table['match_play']  += row['match_play']
-        total_table['team_a']  += row['better_ball_team_a']
-        total_table['team_b']  += row['better_ball_team_b']
+        total_table['match_play']  += int(row['match_play'])
+        total_table['team_a']  += int(row['better_ball_team_a'])
+        total_table['team_b']  += int(row['better_ball_team_b'])
+        total_table['match_play_total'] = total_table['match_play_total'] + int(row['match_play'])
 
         
 

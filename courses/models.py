@@ -46,6 +46,7 @@ class Scoring(models.Model):
     rich_to_par = models.IntegerField(null=True,blank=True)
     sandies = models.CharField(max_length=10,default='')
     match_play = models.IntegerField(null=True,blank=True)
+    match_play_total = models.IntegerField(null=True,blank=True)
     better_ball_team_a = models.IntegerField(null=True,blank=True)
     better_ball_team_b = models.IntegerField(null=True,blank=True)
 
