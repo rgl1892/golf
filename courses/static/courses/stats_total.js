@@ -18,9 +18,9 @@ var cumsum_alex_to_par = d3.cumsum(dataset, (d) => d.alex_to_par);
 var cumsum_jaime_to_par = d3.cumsum(dataset, (d) => d.jaime_to_par);
 var cumsum_rich_to_par = d3.cumsum(dataset, (d) => d.rich_to_par);
 
-var margin = { top: 50, right: 50, bottom: 50, left: 50 },
-  width = 960 - margin.left - margin.right,
-  height = 640 - margin.top - margin.bottom;
+var margin = { top: 50, right: 100, bottom: 50, left: 50 },
+    width = window.innerWidth - margin.left - margin.right,
+    height = (window.innerHeight * 3) / 4 - margin.top - margin.bottom;
 
 var svg = d3
   .select("body")
