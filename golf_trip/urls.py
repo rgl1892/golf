@@ -35,6 +35,7 @@ urlpatterns = [
     path('stats/', views.stats,name='stats'),
     path('score_stats/', views.score_stats,name='score_stats'),
     path('round_stats/', views.round_stats,name='round_stats'),
+    path('stats_total/', views.stats_total,name='stats_total'),
 
     #API
     path('api/',include('api.urls')),
