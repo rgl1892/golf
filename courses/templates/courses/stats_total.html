@@ -5,10 +5,18 @@
 
 <script type="module"  src="{% static 'courses/stats_total.js' %}"></script>
 <div class="container">
-    <button onclick="plot(cumsum_adam)">Adam</button>
-    <button onclick="plot(cumsum_alex)">Alex</button>
-    <button onclick="plot(cumsum_jaime)">Jaime</button>
-    <button onclick="plot(cumsum_rich)">Rich</button>
+    <button onclick="plot(cumsum_adam)">Adam Cumulative</button>
+    <button onclick="plot(cumsum_alex)">Alex Cumulative</button>
+    <button onclick="plot(cumsum_jaime)">Jaime Cumulative</button>
+    <button onclick="plot(cumsum_rich)">Rich Cumulative</button>
+    <button onclick="plot(cumsum_adam_stable)">Adam Stableford</button>
+    <button onclick="plot(cumsum_alex_stable)">Alex Stableford</button>
+    <button onclick="plot(cumsum_jaime_stable)">Jaime Stableford</button>
+    <button onclick="plot(cumsum_rich_stable)">Rich Stableford</button>
+    <button onclick="plot(cumsum_adam_to_par)">Adam To Par</button>
+    <button onclick="plot(cumsum_alex_to_par)">Alex To Par</button>
+    <button onclick="plot(cumsum_jaime_to_par)">Jaime To Par</button>
+    <button onclick="plot(cumsum_rich_to_par)">Rich To Par</button>
     
 <div id="div-template"></div>
 
