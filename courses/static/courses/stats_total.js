@@ -61,7 +61,7 @@ svg
     .call(d3.axisLeft(y));
 
 var valueline = d3.line()
-    .curve(d3.curveCardinal)
+    .curve(d3.curveBumpX)
     .x(function(d,i) { return x(i); })
     .y(function(d,i) { return y(d); });
 //   var line = svg
