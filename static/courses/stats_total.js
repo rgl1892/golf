@@ -5,10 +5,18 @@ function testing() {
 }
 
 
-var cumsum_adam = d3.cumsum(dataset, (d) => d.adam_to_par);
-var cumsum_alex = d3.cumsum(dataset, (d) => d.alex_to_par);
-var cumsum_jaime = d3.cumsum(dataset, (d) => d.jaime_to_par);
-var cumsum_rich = d3.cumsum(dataset, (d) => d.rich_to_par);
+var cumsum_adam = d3.cumsum(dataset, (d) => d.adam);
+var cumsum_alex = d3.cumsum(dataset, (d) => d.alex);
+var cumsum_jaime = d3.cumsum(dataset, (d) => d.jaime);
+var cumsum_rich = d3.cumsum(dataset, (d) => d.rich);
+var cumsum_adam_stable = d3.cumsum(dataset, (d) => d.adam_stable);
+var cumsum_alex_stable = d3.cumsum(dataset, (d) => d.alex_stable);
+var cumsum_jaime_stable = d3.cumsum(dataset, (d) => d.jaime_stable);
+var cumsum_rich_stable = d3.cumsum(dataset, (d) => d.rich_stable);
+var cumsum_adam_to_par = d3.cumsum(dataset, (d) => d.adam_to_par);
+var cumsum_alex_to_par = d3.cumsum(dataset, (d) => d.alex_to_par);
+var cumsum_jaime_to_par = d3.cumsum(dataset, (d) => d.jaime_to_par);
+var cumsum_rich_to_par = d3.cumsum(dataset, (d) => d.rich_to_par);
 
 var margin = { top: 50, right: 50, bottom: 50, left: 50 },
   width = 960 - margin.left - margin.right,
@@ -61,7 +69,7 @@ svg
     .call(d3.axisLeft(y));
 
 var valueline = d3.line()
-    .curve(d3.curveCardinal)
+    .curve(d3.curveBumpX)
     .x(function(d,i) { return x(i); })
     .y(function(d,i) { return y(d); });
 //   var line = svg
@@ -103,6 +111,14 @@ window.cumsum_adam = cumsum_adam;
 window.cumsum_alex = cumsum_alex;
 window.cumsum_jaime = cumsum_jaime;
 window.cumsum_rich = cumsum_rich;
+window.cumsum_adam_stable = cumsum_adam_stable;
+window.cumsum_alex_stable = cumsum_alex_stable;
+window.cumsum_jaime_stable = cumsum_jaime_stable;
+window.cumsum_rich_stable = cumsum_rich_stable;
+window.cumsum_adam_to_par = cumsum_adam_to_par;
+window.cumsum_alex_to_par = cumsum_alex_to_par;
+window.cumsum_jaime_to_par = cumsum_jaime_to_par;
+window.cumsum_rich_to_par = cumsum_rich_to_par;
 
 // var player = document.getElementById('player_choiuce').value
 // var player_event = document
