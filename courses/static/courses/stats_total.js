@@ -1,9 +1,8 @@
 var dataset = await d3.json("/api/scorecards");
 
 function testing() {
-    console.log('test!!')
+  console.log("test!!");
 }
-
 
 var cumsum_adam = d3.cumsum(dataset, (d) => d.adam);
 var cumsum_alex = d3.cumsum(dataset, (d) => d.alex);
@@ -17,10 +16,14 @@ var cumsum_adam_to_par = d3.cumsum(dataset, (d) => d.adam_to_par);
 var cumsum_alex_to_par = d3.cumsum(dataset, (d) => d.alex_to_par);
 var cumsum_jaime_to_par = d3.cumsum(dataset, (d) => d.jaime_to_par);
 var cumsum_rich_to_par = d3.cumsum(dataset, (d) => d.rich_to_par);
+var cumsum_adam_stable_counting = d3.cumsum(dataset, (d) => d.adam_stable);
+var cumsum_alex_stable_counting = d3.cumsum(dataset, (d) => d.alex_stable);
+var cumsum_jaime_stable_counting = d3.cumsum(dataset, (d) => d.jaime_stable);
+var cumsum_rich_stable_counting = d3.cumsum(dataset, (d) => d.rich_stable);
 
 var margin = { top: 50, right: 100, bottom: 50, left: 50 },
-    width = window.innerWidth - margin.left - margin.right,
-    height = (window.innerHeight * 3) / 4 - margin.top - margin.bottom;
+  width = window.innerWidth - margin.left - margin.right,
+  height = (window.innerHeight * 3) / 4 - margin.top - margin.bottom;
 
 var svg = d3
   .select("body")
@@ -33,13 +36,10 @@ var svg = d3
 svg
   .append("g")
   .attr("transform", `translate(0,${height})`)
-  .attr('class','axis--x');
-svg
-  .append("g")
-  .attr("transform", `translate(0,${0})`)
-  .attr('class','axis--y')
+  .attr("class", "axis--x");
+svg.append("g").attr("transform", `translate(0,${0})`).attr("class", "axis--y");
 
-var duration = 500;
+var duration = 300;
 
 export async function plot(data) {
   console.log(data);
@@ -56,55 +56,41 @@ export async function plot(data) {
     .domain([y_domain.bottom, y_domain.top])
     .range([height, 0]);
 
-svg
-    .selectAll('.axis--x')
+  svg
+    .selectAll(".axis--x")
     .transition()
     .duration(duration)
     .call(d3.axisBottom(x));
 
-svg
-    .selectAll('.axis--y')
+  svg
+    .selectAll(".axis--y")
     .transition()
     .duration(duration)
     .call(d3.axisLeft(y));
 
-var valueline = d3.line()
+  var valueline = d3
+    .line()
     .curve(d3.curveBumpX)
-    .x(function(d,i) { return x(i); })
-    .y(function(d,i) { return y(d); });
-//   var line = svg
-//   .selectAll('.linetest')
-//   .line()
-//   .x((d, i) => x(i))
-//   .y((d, i) => y(d))
-//   .curve(d3.curveCatmullRom.alpha(0.5));
+    .x(function (d, i) {
+      return x(i);
+    })
+    .y(function (d, i) {
+      return y(d);
+    });
 
-//   var line_cum = svg
-//   .append("path")
-//   .attr('class','linetest')
-//   .attr("fill", "none")
-//   .attr("stroke", 'red')
-//   .attr("stroke-width", 3)
-//   .attr(
-//     "d",
-//     line(data)
-//   );
+  var line = svg.selectAll(".lineTest").data([data]);
 
-  var line = svg.selectAll(".lineTest")
-      .data([data]);
-
-    line = line
-      .enter()
+  line = line
+    .enter()
     .append("path")
-      .attr("class","lineTest")
-      .attr("fill", "none")
-  .attr("stroke", 'red')
-  .attr("stroke-width", 3)
-      .merge(line);
+    .attr("class", "lineTest")
+    .attr("fill", "none")
+    .attr("stroke", "red")
+    .attr("stroke-width", 3)
+    .merge(line)
+    ;
 
-    line.transition()
-      .duration(duration)
-      .attr("d", valueline)
+  line.transition().duration(duration).ease(d3.easeElastic.amplitude(2.7)).duration(2000).attr("d", valueline);
 }
 window.plot = plot;
 window.cumsum_adam = cumsum_adam;

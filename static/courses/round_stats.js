@@ -114,6 +114,7 @@ for (let j = 0; j < 18; j++) {
     ),
   };
 }
+console.log(hole_mean_data)
 
 async function mean_plot() {
   var margin = { top: 50, right: 50, bottom: 50, left: 50 },
@@ -727,9 +728,10 @@ async function course() {
     .append("rect")
     .attr("class", "bar-adam")
     .attr("x", (d) => (d.hole / 19) * width)
-    .attr("y", (d) => (-d.faldo_score+d.par * height) / y_domain.top)
+    .attr("y", (d) =>  (-d.faldo_score * height) / y_domain.top
+    )
     .attr("width", bar_width)
-    .attr("height", (d) => (d.faldo_score-d.par * height) / y_domain.top)
+    .attr("height", (d) => (d.faldo_score * height) / y_domain.top)
     .attr("fill", adam_color)
     .attr("stroke", "black")
     .attr("stroke-width", "1")
