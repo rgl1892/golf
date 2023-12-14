@@ -25,9 +25,8 @@ SECRET_KEY = 'django-insecure-=3^59i0#pi3h*zfl3d9(7!z^6nm5hk^g9q#zlux&!4w&(v=v!c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['rgl1892.pythonanywhere.com',
-                 'thesuperbock.co.uk',
-                 'www.thesuperbock.co.uk'
+ALLOWED_HOSTS = [
+                '*',
                  ]
 
 
@@ -135,8 +134,3 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = False
-
-try:
-    from .local_settings import *
-except ImportError:
-    print("Looks like no local file. On Prod")

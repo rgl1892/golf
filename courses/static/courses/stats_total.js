@@ -90,7 +90,7 @@ export async function plot(data) {
     .merge(line)
     ;
 
-  line.transition().duration(duration).ease(d3.easeElastic.amplitude(2.7)).duration(2000).attr("d", valueline);
+  line.transition().duration(duration).ease(d3.easeElasticInOut.amplitude(2.7).period(0.2)).duration(2000).attr("d", valueline);
 }
 window.plot = plot;
 window.cumsum_adam = cumsum_adam;
